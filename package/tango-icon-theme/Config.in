@@ -1,0 +1,6 @@
+config BR2_PACKAGE_TANGO_ICON_THEME
+	bool "tango icon theme"
+	help
+	  Icons from the tango desktop project.
+
+	  http://tango.freedesktop.org/Tango_Desktop_Project
