@@ -1,0 +1,129 @@
+diff -rupN a/dmai/packages/ti/sdo/dmai/ce/I2p.c b/dmai/packages/ti/sdo/dmai/ce/I2p.c
+--- a/dmai/packages/ti/sdo/dmai/ce/I2p.c	2010-08-23 06:26:15.000000000 -0700
++++ b/dmai/packages/ti/sdo/dmai/ce/I2p.c	2010-08-23 13:26:06.000000000 -0700
+@@ -82,6 +82,8 @@ Int I2p_process(I2p_Handle hI2p, Buffer_
+     assert(Buffer_getSize(hInBuf));
+     assert(Buffer_getSize(hOutBuf));
+ 
++    universalOutArgs.extendedError        = NULL;
++
+     inputArgs.universalInArgs             = universalInArgs;
+     outputArgs.universalOutArgs           = universalOutArgs;
+     inputArgs.universalInArgs.size        = sizeof(inputArgs);
+diff -rupN a/dmai/packages/ti/sdo/dmai/linux/Display.c b/dmai/packages/ti/sdo/dmai/linux/Display.c
+--- a/dmai/packages/ti/sdo/dmai/linux/Display.c	2010-08-23 06:26:17.000000000 -0700
++++ b/dmai/packages/ti/sdo/dmai/linux/Display.c	2010-08-23 13:29:41.000000000 -0700
+@@ -288,6 +288,7 @@ static Int sysfsSetup_device (FsOptions 
+                                                                 const Char *fileName)
+ {
+     int     index=0;
++    int     _sys =0;
+ 
+     while ((command != displayCommand[index].command) && 
+             (displayCommand[index].command != FsOptions_COMMANDS_END)){
+@@ -300,45 +301,45 @@ static Int sysfsSetup_device (FsOptions 
+     }
+ 
+     if (displayCommand[index].command == FsOptions_FBSET_DVI) {
+-        system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
+-        system("fbset -fb /dev/fb0 -xres 720 -yres 480 -vxres 720 -vyres 480");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
++        _sys = system("fbset -fb /dev/fb0 -xres 720 -yres 480 -vxres 720 -vyres 480");
+     }
+     else if (displayCommand[index].command == FsOptions_FBSET_LCD){
+-        system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
+-        system("fbset -fb /dev/fb0 -xres 480 -yres 640 -vxres 480 -vyres 640");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
++        _sys = system("fbset -fb /dev/fb0 -xres 480 -yres 640 -vxres 480 -vyres 640");
+     }
+     else if (displayCommand[index].command == FsOptions_FBSET_TV){
+-        system("echo 0 > /sys/devices/platform/omapdss/overlay0/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display0/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display1/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display2/enabled");
+-        system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay0/manager");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay1/manager");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay2/manager");
+-        system("fbset -fb /dev/fb0 -xres 720 -yres 480 -vxres 720 -vyres 480 -depth 16");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/overlay0/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display0/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display1/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display2/enabled");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay0/manager");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay1/manager");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay2/manager");
++        _sys = system("fbset -fb /dev/fb0 -xres 720 -yres 480 -vxres 720 -vyres 480 -depth 16");
+     }
+     else if (displayCommand[index].command == FsOptions_FBSET_TV_LCD){
+-        system("echo 0 > /sys/devices/platform/omapdss/overlay0/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display0/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display1/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display2/enabled");
+-        system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay0/manager");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay1/manager");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay2/manager");
+-        system("fbset -fb /dev/fb0 -xres 480 -yres 640 -vxres 480 -vyres 640 ");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/overlay0/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display0/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display1/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display2/enabled");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay0/manager");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay1/manager");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay2/manager");
++        _sys = system("fbset -fb /dev/fb0 -xres 480 -yres 640 -vxres 480 -vyres 640 ");
+     }
+     else if (displayCommand[index].command == FsOptions_FBSET_TV_DVI){
+-        system("echo 0 > /sys/devices/platform/omapdss/overlay0/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display0/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display1/enabled");
+-        system("echo 0 > /sys/devices/platform/omapdss/display2/enabled");
+-        system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay0/manager");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay1/manager");
+-        system("echo \"\" > /sys/devices/platform/omapdss/overlay2/manager");
+-        system("fbset -fb /dev/fb0 -xres 720 -yres 480 -vxres 720 -vyres 480");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/overlay0/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display0/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display1/enabled");
++        _sys = system("echo 0 > /sys/devices/platform/omapdss/display2/enabled");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/manager0/display");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay0/manager");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay1/manager");
++        _sys = system("echo \"\" > /sys/devices/platform/omapdss/overlay2/manager");
++        _sys = system("fbset -fb /dev/fb0 -xres 720 -yres 480 -vxres 720 -vyres 480");
+     }
+     /* Write command in sysfs file */
+     else if ( _Dmai_writeSysFs(fileName, displayCommand[index].value) < 0) {
+@@ -448,6 +449,7 @@ Int _Display_sysfsChange(Display_Output 
+ {
+ #ifdef Dmai_Device_omap3530
+     FsOptionsSequence *sequence = NULL;
++    int _sys                    = 0;
+     Display_Output  currentDisplayOutput;
+ 
+     /* List of Sequences using the FileSystem entries to switch displays */        
+@@ -581,7 +583,7 @@ Int _Display_sysfsChange(Display_Output 
+             *rotation = 0;
+         }
+         if (currentDisplayOutput == Display_Output_SVIDEO){
+-            system("fbset -fb /dev/fb0 -depth 16");
++            _sys = system("fbset -fb /dev/fb0 -depth 16");
+         }
+         *displayOutput = currentDisplayOutput; 
+     }
+diff -rupN a/dmai/packages/ti/sdo/dmai/linux/Display_fbdev.c b/dmai/packages/ti/sdo/dmai/linux/Display_fbdev.c
+--- a/dmai/packages/ti/sdo/dmai/linux/Display_fbdev.c	2010-08-23 06:26:17.000000000 -0700
++++ b/dmai/packages/ti/sdo/dmai/linux/Display_fbdev.c	2010-08-23 13:27:28.000000000 -0700
+@@ -134,7 +134,7 @@ Display_Handle Display_fbdev_create(BufT
+     Int                      displaySize;
+     Int                      bufIdx;
+     Int8                    *virtPtr;
+-    Int32                    physPtr;
++    Int32                    physPtr       = 0;
+     Int                      height, width;
+     Display_Handle           hDisplay;
+     Buffer_Handle            hBuf;

@@ -1,0 +1,6 @@
+config BR2_PACKAGE_TI_DVSDK_DM365
+	bool "DVSDK for TI's DM365 processor"
+	depends on BR2_PACKAGE_TI_PLATFORM_dm365 || BR2_PACKAGE_TI_PLATFORM_dm368
+	select BR2_PACKAGE_ALSA_LIB
+	help
+	  TI's DVSDK

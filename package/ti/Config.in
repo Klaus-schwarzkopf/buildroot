@@ -1,0 +1,59 @@
+menuconfig BR2_PACKAGE_TI_OMAP_DAVINCI
+	bool "TI OMAP and Davinci support"
+	depends on BR2_arm
+	help
+    OMAP3 Support for the builtin DSP
+    
+if BR2_PACKAGE_TI_OMAP_DAVINCI
+
+choice
+  prompt "Processor/DSP Platform"
+  default BR2_PACKAGE_TI_PLATFORM_omap3
+  
+  config BR2_PACKAGE_TI_PLATFORM_omap3
+    bool "OMAP 3530"
+  
+  config BR2_PACKAGE_TI_PLATFORM_dm365
+    bool "DM365"
+
+  # TODO: Implement other platforms
+  # config BR2_PACKAGE_TI_PLATFORM_l137
+  #   bool "OMAP L1XX (L137)"
+  # 
+  # config BR2_PACKAGE_TI_PLATFORM_l138
+  #   bool "OMAP L138"
+  # 
+  # config BR2_PACKAGE_TI_PLATFORM_dm6446
+  #   bool "DM6446"
+  #   
+  # config BR2_PACKAGE_TI_PLATFORM_dm6467
+  #   bool "DM6467"
+  #
+  # config BR2_PACKAGE_TI_PLATFORM_dm368
+  #   bool "DM368"
+  #
+  # config BR2_PACKAGE_TI_PLATFORM_dm355
+  #   bool "DM355"
+
+endchoice
+
+comment "Target components"
+source "package/ti/ti-codecs-omap3/Config.in"
+source "package/ti/ti-dsplink/Config.in"
+source "package/ti/ti-gst-plugin/Config.in"
+source "package/ti/ti-linuxutils/Config.in"
+source "package/ti/ti-local-power-manager/Config.in"
+
+comment "Staging tools"
+source "package/ti/ti-biosutils/Config.in"
+source "package/ti/ti-cgt6x/Config.in"
+source "package/ti/ti-codec-engine/Config.in"
+source "package/ti/ti-dmai/Config.in"
+source "package/ti/ti-dspbios/Config.in"
+source "package/ti/ti-dvsdk-dm365/Config.in"
+source "package/ti/ti-edma3lld/Config.in"
+source "package/ti/ti-framework-components/Config.in"
+source "package/ti/ti-xdais/Config.in"
+source "package/ti/ti-xdctools/Config.in"
+
+endif

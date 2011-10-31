@@ -396,6 +396,9 @@ menu "Miscellaneous"
 source "package/shared-mime-info/Config.in"
 endmenu
 
+#TI's Packages
+source "package/ti/Config.in"
+
 menu "Networking applications"
 source "package/argus/Config.in"
 source "package/avahi/Config.in"

@@ -1,0 +1,11 @@
+config BR2_PACKAGE_TI_LOCAL_POWER_MANAGER
+	bool "Local Power Manager (LPM)"
+	depends on BR2_PACKAGE_TI_PLATFORM_omap3530 || BR2_PACKAGE_TI_PLATFORM_dm6446
+	select BR2_PACKAGE_TI_DSPLINK
+	select BR2_PACKAGE_TI_XDCTOOLS
+	help
+	  TI Local Power Manager (LPM)
+	  http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/lpm	
+	  
+	  Currently only make and install the lpm kernel module. 
+	  And you will need to add a startup script to load the kernel module...

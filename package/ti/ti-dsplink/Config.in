@@ -1,0 +1,12 @@
+config BR2_PACKAGE_TI_DSPLINK
+	bool "DSPLink Inter-Processor Communications (IPC)"
+	depends on BR2_PACKAGE_TI_PLATFORM_omap3
+	# Could also be used for: BR2_PACKAGE_TI_PLATFORM_dm6467 ||  BR2_PACKAGE_TI_PLATFORM_omapl137 || BR2_PACKAGE_TI_PLATFORM_omapl138 || 
+	select BR2_PACKAGE_TI_DSPBIOS
+	select BR2_PACKAGE_TI_XDCTOOLS
+	help
+	  DSPLINK Inter-Processor Communications (IPC) for TI ARM/DSP processors
+	  http://software-dl.ti.com/dsps/dsps_public_sw/DSPLink/index.html
+		
+	  You will need to add a startup script to load the kernel module manually.
+	

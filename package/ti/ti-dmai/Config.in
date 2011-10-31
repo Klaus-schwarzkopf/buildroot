@@ -1,0 +1,14 @@
+config BR2_PACKAGE_TI_DMAI
+	bool "Davinci Multimedia Application Interface (DMAI)"
+	depends on BR2_PACKAGE_TI_PLATFORM_omap3
+	select BR2_PACKAGE_ALSA_LIB
+	select BR2_PACKAGE_TI_FRAMEWORK_COMPONENTS
+	select BR2_PACKAGE_TI_CODEC_ENGINE
+	select BR2_PACKAGE_TI_XDCTOOLS
+	select BR2_PACKAGE_TI_DSPBIOS
+	select BR2_PACKAGE_TI_CGT6X
+	select BR2_PACKAGE_TI_CODECS_OMAP3
+	select BR2_PACKAGE_TI_LINUXUTILS
+	help
+      Davinci Multimedia Application Interface (DMAI) for TI ARM/DSP processors
+      https://gforge.ti.com/gf/project/dmai/

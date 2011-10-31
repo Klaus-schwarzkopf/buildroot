@@ -1,0 +1,8 @@
+config BR2_PACKAGE_TI_LINUXUTILS
+	bool "MFP Linux utils"
+	depends on BR2_PACKAGE_TI_PLATFORM_omap3
+	help
+	  MFP Linux utils for TI ARM/DSP processors (a.k.a. ti-linuxutils). 
+	  You will need to add a startup script to load the different kernel 
+	  modules (cmemk,sdmak,etc.) manually as it is different for each platform 
+	  and usage.

@@ -1,0 +1,21 @@
+config BR2_PACKAGE_TI_CODEC_ENGINE
+	bool "Codec Engine"
+	depends on BR2_PACKAGE_TI_PLATFORM_omap3 
+	# Could probably be used for || BR2_PACKAGE_TI_PLATFORM_dm6446
+	select BR2_PACKAGE_TI_LOCAL_POWER_MANAGER
+	select BR2_PACKAGE_TI_FRAMEWORK_COMPONENTS
+	select BR2_PACKAGE_TI_XDAIS
+	select BR2_PACKAGE_TI_XDCTOOLS
+	select BR2_PACKAGE_TI_LINUXUTILS
+	select BR2_PACKAGE_TI_DSPBIOS
+	select BR2_PACKAGE_TI_DSPLINK
+	select BR2_PACKAGE_TI_BIOSUTILS
+	select BR2_PACKAGE_TI_CGT6X
+	select BR2_PACKAGE_TI_EDMA3LLD
+	help
+	  Codec Engine for TI ARM/DSP processors
+	  http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/ce
+
+config BR2_PACKAGE_TI_CODEC_ENGINE_EXAMPLES
+	bool "Install Codec Engine examples on target"
+	depends on BR2_PACKAGE_TI_CODEC_ENGINE

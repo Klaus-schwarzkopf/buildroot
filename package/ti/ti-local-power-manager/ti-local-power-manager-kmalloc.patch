@@ -1,0 +1,14 @@
+diff -rupN a/packages/ti/bios/power/modules/omap3530/lpm/lpm_driver.c b/packages/ti/bios/power/modules/omap3530/lpm/lpm_driver.c
+--- a/packages/ti/bios/power/modules/omap3530/lpm/lpm_driver.c	2010-04-30 13:19:43.000000000 -0700
++++ b/packages/ti/bios/power/modules/omap3530/lpm/lpm_driver.c	2010-08-20 07:16:45.378243681 -0700
+@@ -41,6 +41,10 @@
+ #endif
+ #include <linux/io.h>
+ 
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34)
++#include <linux/slab.h>
++#endif
++
+ #include "lpm_driver.h"
+ #include "lpm_dev.h"
+ 

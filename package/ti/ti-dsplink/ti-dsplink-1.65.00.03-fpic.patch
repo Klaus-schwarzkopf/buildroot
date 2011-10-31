@@ -1,0 +1,12 @@
+diff -rup a/dsplink/make/Linux/omap3530_2.6.mk b/dsplink/make/Linux/omap3530_2.6.mk
+--- a/dsplink/make/Linux/omap3530_2.6.mk	2010-07-16 02:03:04.000000000 -0700
++++ b/dsplink/make/Linux/omap3530_2.6.mk	2010-08-23 11:18:35.000000000 -0700
+@@ -129,7 +129,7 @@ CC_SW_DEB       := -g
+ #   ----------------------------------------------------------------------------
+ #   Standard flags for the compiler
+ #   ----------------------------------------------------------------------------
+-STD_USER_FLAGS  := -Wall -c
++STD_USER_FLAGS  := -Wall -fPIC -c
+ 
+ #   ----------------------------------------------------------------------------
+ #   Standard flags for the compiler when building an executable

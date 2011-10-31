@@ -1,0 +1,14 @@
+diff -rupN a/packages/ti/sdo/linuxutils/irq/src/module/irqk.c b/packages/ti/sdo/linuxutils/irq/src/module/irqk.c
+--- a/packages/ti/sdo/linuxutils/irq/src/module/irqk.c	2010-07-22 15:28:20.000000000 -0700
++++ b/packages/ti/sdo/linuxutils/irq/src/module/irqk.c	2010-09-09 05:57:44.663063814 -0700
+@@ -56,6 +56,10 @@
+ #include <mach/mux.h>
+ #endif  /* defined(LSP_210) */
+ #endif
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(2,6,34)
++#include <linux/slab.h>
++#endif
++
+ 
+ #include "irqk.h"
+ 

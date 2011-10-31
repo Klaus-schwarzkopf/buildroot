@@ -1,0 +1,10 @@
+config BR2_PACKAGE_TI_CODECS_OMAP3
+	bool "TI DSP Codecs"
+	depends on BR2_PACKAGE_TI_PLATFORM_omap3
+	depends on BR2_PACKAGE_TI_CODEC_ENGINE
+	select BR2_PACKAGE_TI_XDCTOOLS
+	select BR2_PACKAGE_TI_LINUXUTILS
+	select BR2_PACKAGE_TI_LOCAL_POWER_MANAGER
+	help
+	  TI Codecs for the OMAP3
+	  http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent
