@@ -82,7 +82,7 @@ endif
 
 define TI_DVSDK_DM365_CONFIGURE_CMDS
 	$(SED) s:DVSDK_INSTALL_DIR=.*:DVSDK_INSTALL_DIR=$(@D):g $(@D)/Rules.make
-	$(SED) s:LINUXKERNEL_INSTALL_DIR=.*:LINUXKERNEL_INSTALL_DIR=$(BUILD_DIR)/linux-$(LINUX26_VERSION):g $(@D)/Rules.make
+	$(SED) s:LINUXKERNEL_INSTALL_DIR=.*:LINUXKERNEL_INSTALL_DIR=$(LINUX_DIR):g $(@D)/Rules.make
 	$(SED) s:CSTOOL_DIR=.*:CSTOOL_DIR=$(dir $(TARGET_CROSS))/..:g $(@D)/Rules.make
 	$(SED) s:CSTOOL_PREFIX=.*:CSTOOL_PREFIX=$(TARGET_CROSS):g $(@D)/Rules.make
 	$(SED) s:EXEC_DIR=.*:EXEC_DIR=$(STAGING_DIR)/usr/bin:g $(@D)/Rules.make
@@ -100,11 +100,11 @@ define TI_DVSDK_DM365_BUILD_CMDS
 endef
 
 define TI_DVSDK_DM365_INSTALL_TARGET_CMDS
-	$(INSTALL) -d $(TARGET_DIR)/lib/modules/$(LINUX26_VERSION_PROBED)/kernel/drivers/dsp
-	$(INSTALL) $(TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR)/packages/ti/sdo/linuxutils/cmem/src/module/cmemk.ko $(TARGET_DIR)/lib/modules/$(LINUX26_VERSION_PROBED)/kernel/drivers/dsp/cmemk.ko
-	$(INSTALL) $(TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR)/packages/ti/sdo/linuxutils/irq/src/module/irqk.ko $(TARGET_DIR)/lib/modules/$(LINUX26_VERSION_PROBED)/kernel/drivers/dsp/irqk.ko
-	$(INSTALL) $(TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR)/packages/ti/sdo/linuxutils/edma/src/module/edmak.ko $(TARGET_DIR)/lib/modules/$(LINUX26_VERSION_PROBED)/kernel/drivers/dsp/edmak.ko
-	$(INSTALL) $(TI_DVSDK_DM365_DM365MM_MODULE_INSTALL_DIR)/module/dm365mmap.ko $(TARGET_DIR)/lib/modules/$(LINUX26_VERSION_PROBED)/kernel/drivers/dsp/dm365mmap.ko
+	$(INSTALL) -d $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/kernel/drivers/dsp
+	$(INSTALL) $(TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR)/packages/ti/sdo/linuxutils/cmem/src/module/cmemk.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/kernel/drivers/dsp/cmemk.ko
+	$(INSTALL) $(TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR)/packages/ti/sdo/linuxutils/irq/src/module/irqk.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/kernel/drivers/dsp/irqk.ko
+	$(INSTALL) $(TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR)/packages/ti/sdo/linuxutils/edma/src/module/edmak.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/kernel/drivers/dsp/edmak.ko
+	$(INSTALL) $(TI_DVSDK_DM365_DM365MM_MODULE_INSTALL_DIR)/module/dm365mmap.ko $(TARGET_DIR)/lib/modules/$(LINUX_VERSION_PROBED)/kernel/drivers/dsp/dm365mmap.ko
 endef
 
 ti-dvsdk-dm365-source: $(DL_DIR)/$(TI_DVSDK_DM365_SOURCE)
