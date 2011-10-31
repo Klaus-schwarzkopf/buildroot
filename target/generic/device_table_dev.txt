@@ -108,10 +108,10 @@
 #/dev/st	c	640	0	0	9	96	1	1	4
 
 # USB block devices (ub driver)
-/dev/uba	b	640	0	0	180	0	0	0	-
-/dev/uba	b	640	0	0	180	1	1	1	6
-/dev/ubb	b	640	0	0	180	8	0	0	-
-/dev/ubb	b	640	0	0	180	65	1	1	6
+#/dev/uba	b	640	0	0	180	0	0	0	-
+#/dev/uba	b	640	0	0	180	1	1	1	6
+#/dev/ubb	b	640	0	0	180	8	0	0	-
+#/dev/ubb	b	640	0	0	180	65	1	1	6
 
 # Floppy disk devices
 #/dev/fd	b	640	0	0	2	0	0	1	2
@@ -146,3 +146,12 @@
 #/dev/rtheap     c       666     0       0       10      254     0       0       -
 #/dev/rtscope    c       666     0       0       10      253     0       0       -
 #/dev/rtp        c       666     0       0       150     0       0       1       32
+
+# Video devices
+/dev/video0	c	660	0	0	81	0	0	0	-
+/dev/video2	c	660	0	0	81	1	0	0	-
+/dev/video3	c	660	0	0	81	2	0	0	-
+
+# USB gadget
+/dev/ttyGS	c	660	0	0	249	0	0	1	4
+
