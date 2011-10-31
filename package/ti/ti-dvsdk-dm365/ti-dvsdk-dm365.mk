@@ -3,29 +3,17 @@
 # ti-dvsdk-dm365
 #
 ################################################################################
-TI_DVSDK_DM365_VERSION:=4.02.00.16
+TI_DVSDK_DM365_VERSION:=4.02.00.06
 TI_DVSDK_DM365_FILE_VERSION_MAJOR:=4_00
-TI_DVSDK_DM365_FILE_VERSION:=$(TI_DVSDK_DM365_FILE_VERSION_MAJOR)_00_17
-
+TI_DVSDK_DM365_FILE_VERSION:=4_02_00_06
 TI_DVSDK_DM365_SOURCE:=ti-dvsdk-dm365-$(TI_DVSDK_DM365_VERSION).tar.gz
-TI_DVSDK_DM365_SOURCE_BIN:=dvsdk_dm365-evm_$(TI_DVSDK_DM365_FILE_VERSION)_setuplinux.bin
+TI_DVSDK_DM365_SOURCE_BIN:=dvsdk_dm365-evm_$(TI_DVSDK_DM365_FILE_VERSION)_setuplinux
 TI_DVSDK_DM365_SOURCE_BIN_FOLDER:=dvsdk_dm365-evm_$(TI_DVSDK_DM365_FILE_VERSION)
 TI_DVSDK_DM365_SITE:=http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/dvsdk/DVSDK_$(TI_DVSDK_DM365_FILE_VERSION_MAJOR)/latest/exports
 TI_DVSDK_DM365_DIR:=$(BUILD_DIR)/ti-dvsdk-dm365-$(TI_DVSDK_DM365_VERSION)
 
 TI_DVSDK_DM365_INSTALL_STAGING = NO
-TI_DVSDK_DM365_DEPENDENCIES = linux26 alsa-lib
-
-# The DVSDK installer from TI will REFUSE to install itself if it does not find
-# the right version of the CodeSourcery compiler. This package will download
-# then extract the CodeSourcery compiler to a temp directory and keep it there 
-# just long enough to run the DVSDK installer.
-# It's not the best solution but, for the moment, it's the only one that works.
-TI_DVSDK_DM365_CS_VERSION_MAJOR=2009q1
-TI_DVSDK_DM365_CS_VERSION=$(TI_DVSDK_DM365_CS_VERSION_MAJOR)-203
-TI_DVSDK_DM365_CS_FILE=arm-$(TI_DVSDK_DM365_CS_VERSION)-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2
-TI_DVSDK_DM365_CS_SITE=http://www.codesourcery.com/public/gnu_toolchain/arm-none-linux-gnueabi
-TI_DVSDK_DM365_CS_DIR=arm-$(TI_DVSDK_DM365_CS_VERSION_MAJOR)
+TI_DVSDK_DM365_DEPENDENCIES = linux alsa-lib
 
 # Extracting the DVSDK unattended, requires a python script.
 TI_DVSDK_DM365_EXTRACT=$(TOPDIR)/package/ti/ti-dvsdk-dm365/ti-dvsdk-dm365-extract.py
@@ -44,24 +32,43 @@ TI_DVSDK_DM365_LINUXUTILS_INSTALL_DIR:=$(TI_DVSDK_DM365_DIR)/`grep -m 1 LINUXUTI
 # Select what will be built in the DVSDK (not using build all)
 TI_DVSDK_DM365_TARGETS=cmem irq edma dm365mm dmai
 
-# Where to install the kernel modules
+ifeq ($(BR2_TOOLCHAIN_EXTERNAL_CODESOURCERY_ARM2009Q1),y)
+
+
+else
+# The DVSDK installer from TI will REFUSE to install itself if it does not find
+# the right version of the CodeSourcery compiler. This package will download
+# then extract the CodeSourcery compiler to a temp directory and keep it there 
+# just long enough to run the DVSDK installer.
+# It's not the best solution but, for the moment, it's the only one that works.
+TI_DVSDK_DM365_CS_VERSION_MAJOR=2009q1
+TI_DVSDK_DM365_CS_VERSION=$(TI_DVSDK_DM365_CS_VERSION_MAJOR)-203
+TI_DVSDK_DM365_CS_FILE=arm-$(TI_DVSDK_DM365_CS_VERSION)-arm-none-linux-gnueabi-i686-pc-linux-gnu.tar.bz2
+TI_DVSDK_DM365_CS_SITE=http://www.codesourcery.com/public/gnu_toolchain/arm-none-linux-gnueabi
+TI_DVSDK_DM365_CS_DIR=arm-$(TI_DVSDK_DM365_CS_VERSION_MAJOR)
+
+
+#Download CodeSourcery compiler
 $(DL_DIR)/$(TI_DVSDK_DM365_CS_FILE):
 	$(call DOWNLOAD,$(TI_DVSDK_DM365_CS_SITE),$(TI_DVSDK_DM365_CS_FILE))
 
-# NOTE:
-# Archive contains hardlinks and it may fails on some filesystem. Ignoring
-# return values will adding the missing symlink will resolve the issue.
-# Anyway, CodeSourcery is not used in this package.
-$(DL_DIR)/$(TI_DVSDK_DM365_SOURCE): $(DL_DIR)/$(TI_DVSDK_DM365_CS_FILE)
-	$(call DOWNLOAD,$(TI_DVSDK_DM365_SITE),$(TI_DVSDK_DM365_SOURCE_BIN))
+
+$(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)/bin/arm-none-linux-gnueabi-gcc: $(DL_DIR)/$(TI_DVSDK_DM365_CS_FILE)
 	- (cd $(DL_DIR);tar -xf $(DL_DIR)/$(TI_DVSDK_DM365_CS_FILE))
 	( if [ ! -e $(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)/bin/arm-none-linux-gnueabi-gcc ]; then\
 			ln -s $(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)/bin/arm-none-linux-gnueabi-gcc-4.3.3 $(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)/bin/arm-none-linux-gnueabi-gcc;\
 		fi\
 	)
+
+# NOTE:
+# Archive contains hardlinks and it may fails on some filesystem. Ignoring
+# return values will adding the missing symlink will resolve the issue.
+# Anyway, CodeSourcery is not used in this package.
+$(DL_DIR)/$(TI_DVSDK_DM365_SOURCE): $(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)/bin/arm-none-linux-gnueabi-gcc
+	$(call DOWNLOAD,$(TI_DVSDK_DM365_SITE),$(TI_DVSDK_DM365_SOURCE_BIN))
 	chmod +x $(DL_DIR)/$(TI_DVSDK_DM365_SOURCE_BIN)
 	python $(TI_DVSDK_DM365_EXTRACT) \
-		$(DL_DIR)/$(TI_DVSDK_DM365_SOURCE_BIN) \
+		"$(DL_DIR)/$(TI_DVSDK_DM365_SOURCE_BIN) --mode console"\
 		$(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)/bin \
 		$(DL_DIR)/$(TI_DVSDK_DM365_SOURCE_BIN_FOLDER)
 	find $(DL_DIR)/$(TI_DVSDK_DM365_SOURCE_BIN_FOLDER) -type f -not -readable -exec sudo chmod gou+r {} \;
@@ -71,7 +78,7 @@ $(DL_DIR)/$(TI_DVSDK_DM365_SOURCE): $(DL_DIR)/$(TI_DVSDK_DM365_CS_FILE)
 	)
 	rm -rf $(DL_DIR)/$(TI_DVSDK_DM365_SOURCE_BIN_FOLDER)
 	rm -rf $(DL_DIR)/$(TI_DVSDK_DM365_CS_DIR)
-
+endif
 
 define TI_DVSDK_DM365_CONFIGURE_CMDS
 	$(SED) s:DVSDK_INSTALL_DIR=.*:DVSDK_INSTALL_DIR=$(@D):g $(@D)/Rules.make

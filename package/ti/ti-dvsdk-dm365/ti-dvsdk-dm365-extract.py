@@ -26,7 +26,7 @@ else:
 	print "Destination: ",
 	print destination
 
-pb = Popen(installer, shell=False, stdout=PIPE, stdin=PIPE, stderr=PIPE)
+pb = Popen(installer, shell=True, stdout=PIPE, stdin=PIPE, stderr=PIPE)
 question = 0
 data = pb.stdout.read(1)
 while data:
