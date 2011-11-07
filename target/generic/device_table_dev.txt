@@ -155,3 +155,7 @@
 # USB gadget
 /dev/ttyGS	c	660	0	0	249	0	0	1	4
 
+# MMC 
+/dev/mmcblk	b	660	0	0	179	0	0	0	-
+/dev/mmcblk0p	b	660	0	0	179	1	1	1	2
+
