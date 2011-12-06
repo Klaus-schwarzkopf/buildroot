@@ -200,10 +200,6 @@ source "package/picocom/Config.in"
 source "package/rng-tools/Config.in"
 source "package/sdparm/Config.in"
 source "package/setserial/Config.in"
-if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
-# busybox has fdisk
-source "package/sfdisk/Config.in"
-endif
 source "package/smartmontools/Config.in"
 source "package/squashfs/Config.in"
 source "package/squashfs3/Config.in"
@@ -357,7 +353,6 @@ source "package/libev/Config.in"
 source "package/libffi/Config.in"
 source "package/libglib2/Config.in"
 source "package/libnspr/Config.in"
-source "package/liboil/Config.in"
 source "package/libsigc/Config.in"
 source "package/orc/Config.in"
 source "package/poco/Config.in"
@@ -490,7 +485,6 @@ source "package/udpcast/Config.in"
 source "package/vpnc/Config.in"
 source "package/vsftpd/Config.in"
 source "package/vtun/Config.in"
-source "package/webif/Config.in"
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
 source "package/wget/Config.in"
 endif

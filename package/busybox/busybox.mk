@@ -141,8 +141,6 @@ endef
 BUSYBOX_POST_EXTRACT_HOOKS += BUSYBOX_COPY_CONFIG
 
 define BUSYBOX_CONFIGURE_CMDS
-	$(BUSYBOX_SET_SYSKLOGD)
-	$(BUSYBOX_SET_BB_PWD)
 	$(BUSYBOX_SET_LARGEFILE)
 	$(BUSYBOX_SET_IPV6)
 	$(BUSYBOX_SET_RPC)
@@ -187,5 +185,5 @@ busybox-menuconfig busybox-xconfig busybox-gconfig: busybox-patch
 	rm -f $(BUSYBOX_DIR)/.stamp_built
 	rm -f $(BUSYBOX_DIR)/.stamp_target_installed
 
-busybox-update:
+busybox-update-config:
 	cp -f $(BUSYBOX_BUILD_CONFIG) $(BUSYBOX_CONFIG_FILE)
