@@ -1,0 +1,19 @@
+config BR2_PACKAGE_VIDEOSTREAM
+	bool "videostream"
+	help
+	  Main program for the sensortherm mobile
+	  pyrometer camera.
+
+	  http://www.sensortherm.de
+
+if BR2_PACKAGE_VIDEOSTREAM
+
+config BR2_PACKAGE_VIDEOSTREAM_DEBUG
+	bool "videostream debug"
+	help
+	  Debug videostream application.
+	  Add data.img and raw.yuv.
+
+	  http://www.sensortherm.de
+
+endif # BR2_PACKAGE_VIDEOSTREAM

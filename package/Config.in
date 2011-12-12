@@ -6,6 +6,10 @@ source "package/customize/Config.in"
 # Audio and video applications
 source "package/multimedia/Config.in"
 
+menu "Sensortherm"
+source "package/videostream/Config.in"
+endmenu
+
 menu "Compressors and decompressors"
 source "package/bzip2/Config.in"
 if BR2_PACKAGE_BUSYBOX_SHOW_OTHERS
