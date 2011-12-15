@@ -43,6 +43,8 @@ define VIDEOSTREAM_INSTALL_TARGET_CMDS
 #copy start script
 #	cp -R $(@D)/files/S60videostream $(TARGET_DIR)/etc/init.d/
 #endif
+
+mono /home/klaus/LeopardBoardDM365sdkEVAL2011Q2/bootloader/u-boot-2010.12-rc2-psp03.01.01.39/ti-flash-utils/src/DM36x/GNU/bc_DM36x.exe -uboot -pageSize 2048 -blockNum 25 -startAddr 0x82000000 -loadAddr 0x82000000 $(TARGET_DIR)/../images/u-boot.bin -o $(TARGET_DIR)/../images/u-boot.nand.bin
 endef
 
 
