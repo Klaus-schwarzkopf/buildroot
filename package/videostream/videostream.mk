@@ -30,17 +30,24 @@ define VIDEOSTREAM_INSTALL_TARGET_CMDS
 #copy load modules
 	cp -a $(@D)/files/loadmodules_dm365.sh $(TARGET_DIR)/usr/bin/
 
+#copy needed files
+	cp -a $(@D)/files/S30videostream $(TARGET_DIR)/etc/init.d/
+	chmod +x $(TARGET_DIR)/etc/init.d/S30videostream
+
+	cp -a $(@D)/files/g_acm_ms.sh $(TARGET_DIR)/usr/bin/
+	chmod +x $(TARGET_DIR)/usr/bin/g_acm_ms.sh
+
 #copy translations
 	mkdir -p $(TARGET_DIR)/usr/lib/locale/
 
-	    for lang in en_GB.utf8 fr_FR.utf8 ru_RU.utf8 de_DE.utf8 es_ES.utf8; do \
+	for lang in en_GB.utf8 fr_FR.utf8 ru_RU.utf8 de_DE.utf8 es_ES.utf8; do \
 		cp -R $(HOST_DIR)/opt/ext-toolchain/arm-none-linux-gnueabi/libc/usr/lib/locale/$$lang ${TARGET_DIR}/usr/lib/locale/ ; \
-	    done
+	done
 
-	    - for lang in en fr ru de es; do \
+	- for lang in en fr ru de es; do \
 		mkdir -p $(TARGET_DIR)/usr/share/locale/$$lang/LC_MESSAGES/ ; \
 		cp -R $(@D)/po/$$lang/videostream.mo $(TARGET_DIR)/usr/share/locale/$$lang/LC_MESSAGES/ ; \
-	    done
+	done
 
 
 
@@ -57,17 +64,6 @@ define VIDEOSTREAM_INSTALL_TARGET_CMDS
 endef
 
 
-i18n:
-	mkdir -p $(TARGET_DIR)/usr/share/locale/{de,en,ru,fr,es}/LC_MESSAGES/
-	- cp -R $(@D)/po/de/videostream.mo $(TARGET_DIR)/usr/share/locale/de/LC_MESSAGES/
-	- cp -R $(@D)/po/en/videostream.mo $(TARGET_DIR)/usr/share/locale/en/LC_MESSAGES/
-	- cp -R $(@D)/po/ru/videostream.mo $(TARGET_DIR)/usr/share/locale/ru/LC_MESSAGES/
-	- cp -R $(@D)/po/fr/videostream.mo $(TARGET_DIR)/usr/share/locale/fr/LC_MESSAGES/
-	- cp -R $(@D)/po/fr/videostream.mo $(TARGET_DIR)/usr/share/locale/es/LC_MESSAGES/
-	cp -R $(HOST_DIR)/opt/ext-toolchain/arm-none-linux-gnueabi/libc/usr/lib/locale/en_GB.utf8 ${TARGET_DIR}/usr/lib/locale/
-	cp -R $(HOST_DIR)/opt/ext-toolchain/arm-none-linux-gnueabi/libc/usr/lib/locale/fr_FR.utf8 ${TARGET_DIR}/usr/lib/locale/
-	cp -R $(HOST_DIR)/opt/ext-toolchain/arm-none-linux-gnueabi/libc/usr/lib/locale/ru_RU.utf8 ${TARGET_DIR}/usr/lib/locale/
-	cp -R $(HOST_DIR)/opt/ext-toolchain/arm-none-linux-gnueabi/libc/usr/lib/locale/de_DE.utf8 ${TARGET_DIR}/usr/lib/locale/
-	cp -R $(HOST_DIR)/opt/ext-toolchain/arm-none-linux-gnueabi/libc/usr/lib/locale/es_ES.utf8 ${TARGET_DIR}/usr/lib/locale/
+
 
 $(eval $(call GENTARGETS))
