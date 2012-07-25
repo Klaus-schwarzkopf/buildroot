@@ -14,6 +14,10 @@ VIDEOSTREAM_CONF_ENV = CFLAGS="${CFLAGS} -I$(@D)/../linux-custom/include -I$(@D)
 
 
 define VIDEOSTREAM_INSTALL_TARGET_CMDS
+#install program
+	cp -a $(@D)/src/videostream $(TARGET_DIR)/usr/bin/
+	chmod +x $(TARGET_DIR)/usr/bin/videostream
+
 #copy font
 	mkdir -p $(TARGET_DIR)/usr/lib/fonts
 	cp -a $(@D)/ttf/DejaVuSans-Bold.ttf $(TARGET_DIR)/usr/lib/fonts/Default.ttf
