@@ -1,0 +1,10 @@
+config BR2_PACKAGE_CUNIT
+	bool "cunit"
+	help
+	  CUnit is a lightweight system for writing, administering, 
+	  and running unit tests in C.  It provides C programmers a 
+	  basic testing functionality with a flexible variety of 
+	  user interfaces.
+
+	  http://cunit.sourceforge.net/index.html
+
