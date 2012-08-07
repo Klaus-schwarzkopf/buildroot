@@ -24,10 +24,10 @@ define VIDEOSTREAM_INSTALL_TARGET_CMDS
 
 #copy pictures
 	mkdir -p $(TARGET_DIR)/usr/share/icons/videostream/
-	cp -a $(@D)/icons/own/*.png $(TARGET_DIR)/usr/share/icons/videostream/
 	cp -a $(@D)/icons/tango/22x22/devices/{camera-photo,camera-video,video-display}.png $(TARGET_DIR)/usr/share/icons/videostream/
 	cp -a $(@D)/icons/tango/22x22/categories/preferences-system.png $(TARGET_DIR)/usr/share/icons/videostream/
 	cp -a $(@D)/icons/tango/16x16/actions/go-last.png $(TARGET_DIR)/usr/share/icons/videostream/
+	cp -a $(@D)/icons/own/*.png $(TARGET_DIR)/usr/share/icons/videostream/
 
 #copy needed files
 	cp -a $(@D)/files/S30videostream $(TARGET_DIR)/etc/init.d/

@@ -1,0 +1,9 @@
+config BR2_PACKAGE_CPPUNIT
+	bool "cppunit"
+	help
+	  CppUnit is a C++ unit testing framework. 
+	  It started its life as a port of JUnit to 
+	  C++ by Michael Feathers. 
+
+	  http://cppunit.sourceforge.net
+
