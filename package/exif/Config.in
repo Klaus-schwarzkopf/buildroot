@@ -1,0 +1,8 @@
+config BR2_PACKAGE_EXIF
+	bool "exif"
+	help
+	  Most digital cameras produce EXIF files, which are JPEG
+	  files with extra tags that contain information about the
+	  image.
+
+	  http://libexif.sf.net
