@@ -1,0 +1,21 @@
+diff -rupN libexif-0.6.21/libexif/exif-utils.c libexif-new/libexif/exif-utils.c
+--- libexif-0.6.21/libexif/exif-utils.c	2012-07-12 20:31:56.000000000 +0200
++++ libexif-new/libexif/exif-utils.c	2012-08-10 13:41:02.000000000 +0200
+@@ -101,7 +101,16 @@ exif_get_sshort (const unsigned char *bu
+ ExifShort
+ exif_get_short (const unsigned char *buf, ExifByteOrder order)
+ {
+-	return (exif_get_sshort (buf, order) & 0xffff);
++	if (!buf) return 0;
++        switch (order) {
++        case EXIF_BYTE_ORDER_MOTOROLA:
++                return ((buf[0] << 8) | buf[1]);
++        case EXIF_BYTE_ORDER_INTEL:
++                return ((buf[1] << 8) | buf[0]);
++        }
++
++	/* Won't be reached */
++	return (0);
+ }
+ 
+ void
